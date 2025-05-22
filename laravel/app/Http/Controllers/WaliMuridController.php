@@ -3,11 +3,65 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WaliMuridController extends Controller
 {
-    public function wali_murid()
+    public function index()
     {
-        return view('wali_murid');
+        $wali = DB::table('wali_murid')->get();
+        return view('wali_murid', ['wali' => $wali]);
+    }
+
+    public function destroy($id)
+    {
+        // Hapus wali murid berdasarkan ID
+        DB::table('wali_murid')->where('id', $id)->delete();
+        // Redirect ke halaman wali murid index dengan pesan sukses
+        return redirect()->route('wali.index')->with('success', 'Data wali murid berhasil dihapus.');
+    }
+
+    public function create()
+    {
+        return view('wali_form');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama_wali' => 'required',
+            'kontak_wali' => 'required',
+    ]);
+
+    DB::table('wali_murid')->insert([
+        'nama_wali' => $request->nama_wali,
+        'kontak_wali' => $request->kontak_wali,
+    ]);
+
+    return redirect()->route('wali.index')->with('success', 'Data wali berhasil ditambahkan.');
+    }
+
+    public function edit($id)
+    {
+        $wali = DB::table('wali_murid')->where('id', $id)
+        ->first();
+        return view('wali_form', compact('wali'));
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'nama_wali' => 'required',
+            'kontak_wali' => 'required',
+        ]);
+
+        $wali = DB::table('wali_murid')
+        ->where('id', '=', $request->id)
+        ->update([
+            'nama_wali' => $request->nama_wali,
+            'kontak_wali' => $request->kontak_wali,
+        ]);
+
+        return redirect()->route('wali.index');
     }
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Kelas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -13,14 +13,14 @@
     <h2 class="mb-3">Data Siswa</h2>
     <div class="d-flex justify-content-between mb-3">
         <div>
-            <a href="kelas.php" class="btn btn-primary">Kelola Kelas</a>
-            <a href="wali_murid.php" class="btn btn-primary">Kelola Wali murid</a>
+            <a href="{{ route('kelas.index') }}" class="btn btn-primary">Kelola Kelas</a>
+            <a href="{{ route('wali.index') }}" class="btn btn-primary">Kelola Wali murid</a>
         </div>
-        <a href="/siswas/create" class="btn btn-success">Tambah Siswa</a>
+        <a href="/siswa/create" class="btn btn-success">Tambah Siswa</a>
 
     </div>
 
-    <table class="table table-bordered ">
+    <table class="table table-bordered">
         <thead class="table-dark">
             <tr>
                 <th>NIS</th>
@@ -44,8 +44,8 @@
                     <td>{{ $s->nama_kelas }}</td>
                     <td>{{ $s->nama_wali }}</td>
                     <td>    
-                        <a href="edit_siswa.php?id={{ $s->id }}" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="/siswas/delete/{{ $s->id }}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
+                        <a href="/siswa/edit/{{ $s->id }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/siswa/delete/{{ $s->id }}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
 
                     </td>
                 </tr>
@@ -54,6 +54,6 @@
     </table>
 
 </div>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
